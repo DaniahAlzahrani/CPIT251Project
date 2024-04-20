@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author danih
@@ -14,8 +16,8 @@ public class Session {
     private String sessionType;
     private String date;
     private boolean status;
-
-    public boolean isStatus() {
+   
+    public boolean getStatus() {
         return status;
     }
 
