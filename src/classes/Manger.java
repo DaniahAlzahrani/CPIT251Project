@@ -10,6 +10,7 @@ package classes;
  * @author raneemAljehani
  */
 public class Manger extends user {
+    //Release two
      public void addSession() {
         System.out.println("Session added.");
     }
