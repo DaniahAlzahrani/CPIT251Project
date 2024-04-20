@@ -11,6 +11,15 @@ package classes;
  */
 public class Trainer extends user{
       private String password;
+      private boolean status;
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
       
     public void setPassword(String password) {
         this.password = password;
