@@ -4,20 +4,21 @@
  * and open the template in the editor.
  */
 package classes;
+import test.*;
 import java.util.ArrayList;
 
 /**
  *
- * @author Tony-
+ * @author hamdah-
  */
 public class horse {
     //atributes
     private String name ;
     private String type ;
-    private String status;
+    private boolean status;
     private ArrayList<String > horses = new ArrayList<String>();
     //methods
-    public  horse (String Name , String Type , String Status ){
+    public  horse (String Name , String Type , boolean Status ){
         this.name=Name;
         this.type=Type;
         this.status=Status;
@@ -59,11 +60,11 @@ public class horse {
         this.type = type;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
