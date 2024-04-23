@@ -4,34 +4,80 @@
  * and open the template in the editor.
  */
 package classes;
-
+import java.util.ArrayList;
 /**
  *
  * @author raneemAljehani
  */
 public class Manger extends user {
-    //Release two
-     public void addSession() {
-        System.out.println("Session added.");
+    
+    private ArrayList<Session> sessions = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
+
+    
+      public void addSession(Session session) {
+        sessions.add(session);
+        System.out.println("Session " + session.getSessionNumber() + " added successfully.");
     }
 
-    public void deleteSession() {
-        System.out.println("Session deleted.");
+    public void deleteSession(int sessionNumber) {
+        boolean found = false;
+        for (Session session : sessions) {
+            if (session.getSessionNumber() == sessionNumber) {
+                sessions.remove(session);
+                System.out.println("Session " + sessionNumber + " deleted successfully.");
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Session " + sessionNumber + " not found.");
+        }
     }
 
-    public void editSession() {
-        System.out.println("Session edited.");
+    public void editSession(int sessionNumber, String newType, String newDate, boolean newStatus) {
+        for (Session session : sessions) {
+            if (session.getSessionNumber() == sessionNumber) {
+                session.setSessionType(newType);
+                session.setDate(newDate);
+                session.setStatus(newStatus);
+                System.out.println("Session " + sessionNumber + " edited successfully.");
+                return;
+            }
+        }
+        System.out.println("Session " + sessionNumber + " not found for editing.");
     }
 
-    public void approveReservation() {
-        System.out.println("Reservation approved.");
+    public void approveReservation(String reservationNumber) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getRNumber().equals(reservationNumber) && !reservation.getStatus()) {
+                reservation.setStatus(true);
+                System.out.println("Reservation " + reservationNumber + " approved.");
+                return;
+            }
+        }
+        System.out.println("Reservation " + reservationNumber + " not found or already approved.");
     }
 
-    public void editReservation() {
-        System.out.println("Reservation edited.");
+    public void editReservation(String reservationNumber, String newDate) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getRNumber().equals(reservationNumber)) {
+                reservation.setDate(newDate);
+                System.out.println("Reservation " + reservationNumber + " edited successfully.");
+                return;
+            }
+        }
+        System.out.println("Reservation " + reservationNumber + " not found for editing.");
     }
 
     public void report() {
-        System.out.println("Report generated.");
+        System.out.println("Report Generated:");
+        System.out.println("Total Sessions: " + sessions.size());
+        System.out.println("Total Reservations: " + reservations.size());
+        for (Reservation res : reservations) {
+            System.out.println("Reservation Number: " + res.getRNumber() +
+                               ", Date: " + res.getDate() +
+                               ", Status: " + (res.getStatus() ? "Approved" : "Pending"));
+        }
     }
 }
