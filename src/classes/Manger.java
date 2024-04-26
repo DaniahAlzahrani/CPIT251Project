@@ -11,6 +11,8 @@ import java.util.ArrayList;
  */
 public class Manger extends user {
     
+    private String password;
+    
     private ArrayList<Session> sessions = new ArrayList<>();
     private ArrayList<Reservation> reservations = new ArrayList<>();
 
