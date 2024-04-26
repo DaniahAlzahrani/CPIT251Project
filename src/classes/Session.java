@@ -21,6 +21,22 @@ public class Session {
         return status;
     }
 
+    public String getSessionType() {
+        return sessionType;
+    }
+
+    public void setSessionType(String sessionType) {
+        this.sessionType = sessionType;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public void setStatus(boolean status) {
         this.status = status;
     }
