@@ -13,7 +13,7 @@ public class user {
     
     private String name;
     private String phoneNumber;
-    private String password;
+    
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -30,13 +30,4 @@ public class user {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
 }
