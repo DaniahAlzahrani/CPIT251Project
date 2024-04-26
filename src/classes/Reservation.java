@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author Noura
  */
 class Reservation {
-    public static ArrayList<Reservation> reserve = new ArrayList<>() ;
+
+    public static ArrayList<Reservation> reserve = new ArrayList<>();
     private String rNumber;
     private Customer customer;     // Association to Customer
     private horse horse;           // Association to Horse
@@ -23,16 +24,20 @@ class Reservation {
 
     // Constructor to initialize a Reservation object
     public Reservation(String rNumber, Customer customer, horse horse, Session session, String date, Trainer trainer, boolean status) {
-        this.rNumber = rNumber;
-        this.customer = customer;
-        this.horse = horse;
-        this.session = session;
-        this.date = date;
-        this.trainer = trainer;
-        this.status = status;
-        reserve.add(this); // Add this reservation to the list of all reservations
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer account is required.");
+        } else {
+            this.rNumber = rNumber;
+            this.customer = customer;
+            this.horse = horse;
+            this.session = session;
+            this.date = date;
+            this.trainer = trainer;
+            this.status = status;
+            reserve.add(this); // Add this reservation to the list of all reservations
+        }
     }
-    
+
     // Getters and Setters
     public String getRNumber() {
         return rNumber;
@@ -96,26 +101,27 @@ class Reservation {
         System.out.println("Reservation " + rNumber + " cancelled.");
         reserve.remove(this);  // Remove this reservation from the static ArrayList
     }
+
     // Method to reschedule a reservation
     public void rescheduleReservation(String newDate) {
         this.date = newDate;
         this.status = true;
         System.out.println("Reservation " + rNumber + " rescheduled to " + newDate);
     }
-     public static void displayAllReservations() {
+
+    public static void displayAllReservations() {
         if (reserve.isEmpty()) {
             System.out.println("No reservations have been made.");
         } else {
             System.out.println("All Reservations:");
             for (Reservation res : reserve) {
-                System.out.println("Reservation Number: " + res.getRNumber() + ", Date: " + res.getDate() +
-                                   ", Status: " + res.getStatus() + ", Session Status: " + res.getSession().getStatus());
+                System.out.println("Reservation Number: " + res.getRNumber() + ", Date: " + res.getDate()
+                        + ", Status: " + res.getStatus() + ", Session Status: " + res.getSession().getStatus());
             }
         }
     }
-    
-     
-    public Reservation( Session session ) {
+
+    public Reservation(Session session) {
     }
-    
+
 }
