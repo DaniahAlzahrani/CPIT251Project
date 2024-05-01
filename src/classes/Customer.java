@@ -51,6 +51,7 @@ public class Customer extends user {
         } else {
             super.setName(name);
             super.setPhoneNumber(phoneNumber);
+            System.out.println("You contact info is added successfully");
         }
     }
 
