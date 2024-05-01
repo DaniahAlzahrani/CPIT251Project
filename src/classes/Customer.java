@@ -22,7 +22,7 @@ public class Customer extends user {
         }
     }
 
-    public void reserveSession(Session session, horse horse, Trainer trainer) {
+    public void reserveSession(String rNumber, Customer customer, horse horse, Session session, String date, Trainer trainer, boolean status) {
         System.out.println("Session " + session.getSessionNumber() + " (" + session.getStatus() + ") reserved for " + this.getName() + ".");
         if (session.getStatus() == true && horse.getStatus() == true && trainer.getStatus() == true) {
             Reservation newReservation = new Reservation(session);  // Assuming constructor Reservation(Session session) exists
