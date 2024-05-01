@@ -31,6 +31,7 @@ public class CustomerIT {
     
     @Before
     public void setUp() {
+        
     }
     
     @After
@@ -53,7 +54,7 @@ public class CustomerIT {
      * Test of reserveSession method, of class Customer.
      */
     @Test
-public void teststsusReserveSession() {
+public void teststsusTrueReserveSession() {
     
     System.out.println("reserveSession");
     Customer instance = new Customer();
@@ -65,7 +66,32 @@ public void teststsusReserveSession() {
     instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
     assertTrue(session.getStatus());
 }
-
+ @Test
+ public void testhorseTrueReserveSession() {
+    
+    System.out.println("reserveSession");
+    Customer instance = new Customer();
+    Session session = new Session(123 , " " , " " , true);
+    horse horse = new horse(" ", " " , true);
+    Trainer trainer = new Trainer(" " , true);
+    String reservationNumber = "123";
+    String date = "2023-11-01";
+    instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
+    assertTrue(horse.getStatus());
+}
+  @Test
+ public void testTrainerTrueReserveSession() {
+    
+    System.out.println("reserveSession");
+    Customer instance = new Customer();
+    Session session = new Session(123 , " " , " " , true);
+    horse horse = new horse(" ", " " , true);
+    Trainer trainer = new Trainer(" " , true);
+    String reservationNumber = "123";
+    String date = "2023-11-01";
+    instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
+    assertTrue(trainer.getStatus());
+}
     /**
      * Test of getReservationDetails method, of class Customer.
      */
