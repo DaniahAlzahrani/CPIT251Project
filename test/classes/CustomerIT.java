@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,11 +20,18 @@ import static org.junit.Assert.*;
  */
 public class CustomerIT {
     
+    public Customer instance;
+    private static ByteArrayOutputStream outContent;
+    private static PrintStream originalOut;
     public CustomerIT() {
+        
     }
     
     @BeforeClass
     public static void setUpClass() {
+        outContent = new ByteArrayOutputStream();
+        originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
     }
     
     @AfterClass
@@ -31,11 +40,12 @@ public class CustomerIT {
     
     @Before
     public void setUp() {
-        
+        instance = new Customer();
     }
     
     @After
     public void tearDown() {
+         System.setOut(originalOut);
     }
 
     /**
@@ -109,15 +119,23 @@ public void teststsusTrueReserveSession() {
     /**
      * Test of AddContactinfo method, of class Customer.
      */
+    
     @Test
-    public void testAddContactinfo() {
-        System.out.println("AddContactinfo");
-        String name = "";
-        String phoneNumber = "";
-        Customer instance = new Customer();
-        instance.AddContactinfo(name, phoneNumber);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testBothFieldsEmpty() {
+        instance.AddContactinfo("", "");
+        assertEquals("Error message: name and phone number is empty!\n", outContent.toString());
+    }
+
+    @Test
+    public void testNameContainsDigits() {
+        instance.AddContactinfo("Alice123", "9876543210");
+        assertEquals("Error message: name shouldn't contain numbers!\n", outContent.toString());
+    }
+
+    @Test
+    public void testPhoneNumberNotTenDigits() {
+        instance.AddContactinfo("Alice", "123");
+        assertEquals("Error message: number should be only 10 numbers\n", outContent.toString());
     }
 
     /**
