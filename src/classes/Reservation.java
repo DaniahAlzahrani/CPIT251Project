@@ -122,6 +122,8 @@ class Reservation {
     }
 
     public Reservation(Session session) {
+        
+//String rNumber, Customer customer, horse horse, Session session, String date, Trainer trainer, boolean status
     }
 
 }
