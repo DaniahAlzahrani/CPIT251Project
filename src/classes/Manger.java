@@ -13,8 +13,8 @@ public class Manger extends user {
     
     private String password;
     
-    private ArrayList<Session> sessions = new ArrayList<>();
-    private ArrayList<Reservation> reservations = new ArrayList<>();
+    public ArrayList<Session> sessions = new ArrayList<>();
+    public ArrayList<Reservation> reservations = new ArrayList<>();
 
     
       public void addSession(Session session) {
