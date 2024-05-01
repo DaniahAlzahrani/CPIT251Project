@@ -12,11 +12,20 @@ import java.util.ArrayList;
  * @author danih
  */
 public class Session {
+
+   
     private int sessionNumber;
     private String sessionType;
     private String date;
     private boolean status;
    
+    
+     public Session(int sessionNumber, String sessionType, String date, boolean status) {
+        this.sessionNumber = sessionNumber;
+        this.sessionType = sessionType;
+        this.date = date;
+        this.status = status;
+    }
     public boolean getStatus() {
         return status;
     }
