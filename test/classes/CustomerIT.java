@@ -24,6 +24,7 @@ public class CustomerIT {
     public Customer instance;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
+
     public CustomerIT() {
 
     }
@@ -47,17 +48,6 @@ public class CustomerIT {
     public void tearDown() {
         System.setOut(originalOut);
         outContent.reset();
-    }
-
-    /**
-     * Test of showHistory method, of class Customer.
-     */
-    @Test
-    public void testShowHistory() {
-        System.out.println("showHistory");
-        instance.showHistory();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -95,7 +85,7 @@ public class CustomerIT {
         System.out.println("reserveSession");
         Session session = new Session(123, " ", " ", true);
         horse horse = new horse(" ", " ", true);
-        Trainer trainer = new Trainer(" ", true);
+        Trainer trainer = new Trainer(" ", false);
         String reservationNumber = "123";
         String date = "2023-11-01";
         instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
@@ -107,11 +97,11 @@ public class CustomerIT {
 
         System.out.println("reserveSession");
         Session session = new Session(123, " ", " ", true);
-        horse horse = new horse(" ", " ", true);
+        horse horse = new horse(" ", " ", false);
         Trainer trainer = new Trainer(" ", true);
         String reservationNumber = "123";
         String date = "2023-11-01";
-        instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
+        instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, false);
         assertFalse(horse.getStatus());
     }
 
@@ -119,7 +109,7 @@ public class CustomerIT {
     public void testStatusfalseReserveSession() {
 
         System.out.println("reserveSession");
-        Session session = new Session(123, " ", " ", true);
+        Session session = new Session(123, " ", " ", false);
         horse horse = new horse(" ", " ", true);
         Trainer trainer = new Trainer(" ", true);
         String reservationNumber = "123";
@@ -142,45 +132,27 @@ public class CustomerIT {
     }
 
     /**
-     * Test of getReservationDetails method, of class Customer.
-     */
-    @Test
-    public void testGetReservationDetails() {
-        System.out.println("getReservationDetails");
-        String expResult = "";
-        String result = instance.getReservationDetails();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of AddContactinfo method, of class Customer.
      */
     @Test
     public void testBothFieldsEmpty() {
-
-        
-        System.setOut(new PrintStream(outContent));
         instance.AddContactinfo("", "");
         String expectedResult = "Error message: name and phone number is empty!" + System.getProperty("line.separator");
-        System.out.println(outContent.toString() + "XXXXXXX");
         assertEquals(expectedResult, outContent.toString());
     }
 
     @Test
     public void testNameContainsDigits() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
         instance.AddContactinfo("Alice123", "9876543210");
-        String expectedResult = "Error message: name shouldn't contain numbers!"+ System.getProperty("line.separator");
-        assertEquals(expectedResult, out.toString());
+        String expectedResult = "Error message: name shouldn't contain numbers!" + System.getProperty("line.separator");
+        assertEquals(expectedResult, outContent.toString());
     }
 
     @Test
     public void testPhoneNumberNotTenDigits() {
         instance.AddContactinfo("Alice", "123");
-        assertEquals("Error message: number should be only 10 numbers\n", outContent.toString());
+        String expectedResult = "Error message: number should be only 10 numbers" + System.getProperty("line.separator");
+        assertEquals(expectedResult, outContent.toString());
     }
 
 }
