@@ -90,6 +90,45 @@ public void teststsusTrueReserveSession() {
     assertTrue(horse.getStatus());
 }
   @Test
+  public void testTrainerfalseReserveSession() {
+    
+    System.out.println("reserveSession");
+    Customer instance = new Customer();
+    Session session = new Session(123 , " " , " " , true);
+    horse horse = new horse(" ", " " , true);
+    Trainer trainer = new Trainer(" " , true);
+    String reservationNumber = "123";
+    String date = "2023-11-01";
+    instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
+    assertFalse(trainer.getStatus());
+}
+   @Test
+  public void testHorserfalseReserveSession() {
+    
+    System.out.println("reserveSession");
+    Customer instance = new Customer();
+    Session session = new Session(123 , " " , " " , true);
+    horse horse = new horse(" ", " " , true);
+    Trainer trainer = new Trainer(" " , true);
+    String reservationNumber = "123";
+    String date = "2023-11-01";
+    instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
+    assertFalse(horse.getStatus());
+}
+   @Test
+  public void testStatusfalseReserveSession() {
+    
+    System.out.println("reserveSession");
+    Customer instance = new Customer();
+    Session session = new Session(123 , " " , " " , true);
+    horse horse = new horse(" ", " " , true);
+    Trainer trainer = new Trainer(" " , true);
+    String reservationNumber = "123";
+    String date = "2023-11-01";
+    instance.reserveSession(reservationNumber, instance, horse, session, date, trainer, true);
+    assertFalse(session.getStatus());
+}
+  @Test
  public void testTrainerTrueReserveSession() {
     
     System.out.println("reserveSession");
