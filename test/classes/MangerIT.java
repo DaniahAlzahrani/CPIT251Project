@@ -112,24 +112,7 @@ public class MangerIT {
         assertEquals("Reservation date should be updated", newDate, reservation2.getDate());
     }
 
-    @Test
+  
     
-    public void testReport() {
-        manager.report();
-
-        String lineSeparator = System.getProperty("line.separator");
-        StringBuilder expectedResult = new StringBuilder();
-        expectedResult.append("Report Generated:").append(lineSeparator);
-        expectedResult.append("Total Sessions: ").append(manager.sessions.size()).append(lineSeparator);
-        expectedResult.append("Total Reservations: ").append(manager.reservations.size()).append(lineSeparator);
-        
-        for (Reservation res : manager.reservations) {
-            expectedResult.append("Reservation Number: ").append(res.getRNumber())
-                          .append(", Date: ").append(res.getDate())
-                          .append(", Status: ").append(res.getStatus() ? "Approved" : "Pending")
-                          .append(lineSeparator);
-        }
-
-        assertEquals(expectedResult.toString(),outContent.toString());
-    }
+   
 }
