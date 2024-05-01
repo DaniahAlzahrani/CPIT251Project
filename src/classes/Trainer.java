@@ -13,6 +13,11 @@ public class Trainer extends user{
       private String password;
       private boolean status;
 
+    public Trainer(String password, boolean status) {
+        this.password = password;
+        this.status = status;
+    }
+
     public boolean getStatus() {
         return status;
     }
