@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Noura
  */
-class Reservation {
+public class Reservation {
 
     public static ArrayList<Reservation> reserve = new ArrayList<>();
     private String rNumber;
