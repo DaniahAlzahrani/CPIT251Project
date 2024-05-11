@@ -46,7 +46,7 @@ public class Customer extends user {
     }
 
     public void AddContactinfo(String name, String phoneNumber) {
-        if (name.isEmpty() && name.isEmpty()) {
+        if (name.isEmpty() && phoneNumber.isEmpty()) {
             System.out.println("Error message: name and phone number is empty!");
         } else if (containsDigits(name)) {
             System.out.println("Error message: name shouldn't contain numbers!");
