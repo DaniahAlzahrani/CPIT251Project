@@ -15,31 +15,31 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+
 /**
  *
  * @author ranee
  */
 
 public class MangerIT {
-    
+
     private Manger manager;
     private Session session1, session2;
     private Reservation reservation1, reservation2;
 
- 
     @Before
     public void setUp() {
-        
+
         ///////////////////////////////////////
         manager = new Manger();
         // Initialize sessions
-        session1 = new Session(123,"rr","2024-05-01",true);
+        session1 = new Session(123, "rr", "2024-05-01", true);
         session1.setSessionNumber(1);
         session1.setSessionType("Yoga");
         session1.setDate("2024-05-01");
         session1.setStatus(true);
-//int sessionNumber, String sessionType, String date, boolean status
-        session2 = new Session(123,"rr","2024-05-01",true);
+        //int sessionNumber, String sessionType, String date, boolean status
+        session2 = new Session(123, "rr", "2024-05-01", true);
         session2.setSessionNumber(2);
         session2.setSessionType("Pilates");
         session2.setDate("2024-05-02");
@@ -49,29 +49,28 @@ public class MangerIT {
         manager.addSession(session2);
 
         // Assuming the necessary constructors are in place
-    Customer customer1 = new Customer("John Doe");
-    Customer customer2 = new Customer("Doe John");
+        Customer customer1 = new Customer();
+        Customer customer2 = new Customer();
 
-    horse horse1 = new horse("Starlight","r",true);
-    horse horse2 = new horse("Moonlight","r",true);
+        horse horse1 = new horse("Starlight", "r", true);
+        horse horse2 = new horse("Moonlight", "r", true);
 
-    Trainer trainer1 = new Trainer("1233",true);
-    Trainer trainer2 = new Trainer("Dane Joe",true);
+        Trainer trainer1 = new Trainer("1233", true);
+        Trainer trainer2 = new Trainer("Dane Joe", true);
 
-    // Initialize reservations with correct parameters
-    reservation1 = new Reservation("R001", customer1, horse1, session1, "2024-05-01", trainer1, false);
-    reservation2 = new Reservation("R002", customer2, horse2, session2, "2024-05-02", trainer2, true);
-
+        // Initialize reservations with correct parameters
+        reservation1 = new Reservation("R001", customer1, horse1, session1, "2024-05-01", trainer1, false);
+        reservation2 = new Reservation("R002", customer2, horse2, session2, "2024-05-02", trainer2, true);
 
         manager.reservations.add(reservation1);
         manager.reservations.add(reservation2);
-         ArrayList<Session> se = new ArrayList<>();
-              ArrayList<Reservation> reservations = new ArrayList<>();
+        ArrayList<Session> se = new ArrayList<>();
+        ArrayList<Reservation> reservations = new ArrayList<>();
     }
 
     @Test
     public void testAddSession() {
-        Session newSession = new Session(123,"rr","2024-05-01",true);
+        Session newSession = new Session(123, "rr", "2024-05-01", true);
         newSession.setSessionNumber(3);
         newSession.setSessionType("Spin Class");
         newSession.setDate("2024-06-01");
@@ -112,7 +111,4 @@ public class MangerIT {
         assertEquals("Reservation date should be updated", newDate, reservation2.getDate());
     }
 
-  
-    
-   
 }
