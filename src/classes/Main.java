@@ -24,6 +24,8 @@ public class Main {
             new Session(103, "Advanced Horse Riding", "2023-12-14", true),
             new Session(104, "Expert Horse Riding", "2023-12-16", true)
         };
+       
+
         horse[] horses = new horse[]{
             new horse("A", "Breed1", true),
             new horse("B", "Breed2", true),
@@ -52,15 +54,28 @@ public class Main {
                 System.out.println(s.getSessionNumber() + ": " + s.getSessionType());
             }
         }
-        System.out.println("Enter the session number you want to attend:");
+        System.out.println("Enter the session number you want to attend or edit:");
         int sessionChoice = scanner.nextInt();
         scanner.nextLine(); // consume the newline
         Session selectedSession = null;
         for (Session s : sessions) {
-            if (s.getSessionNumber() == sessionChoice && s.getStatus()) {
+            if (s.getSessionNumber() == sessionChoice) {
                 selectedSession = s;
                 break;
             }
+        }
+
+        // Update session details if user desires
+        System.out.println("Do you want to update this session details? (yes/no)");
+        String updateResponse = scanner.nextLine();
+        if ("yes".equalsIgnoreCase(updateResponse)) {
+            System.out.println("Enter new session type:");
+            String newType = scanner.nextLine();
+            System.out.println("Enter new session date (YYYY-MM-DD):");
+            String newDate = scanner.nextLine();
+            System.out.println("Is the session available? (true/false)");
+            boolean newStatus = Boolean.parseBoolean(scanner.nextLine());
+            manager.editSession(selectedSession.getSessionNumber(), newType, newDate, newStatus);
         }
 
         // Select a horse
@@ -79,7 +94,7 @@ public class Main {
         }
 
         // Generate and display the reservation number
-        String reservationNumber = "RSV" + (10000 + random.nextInt(90000)); // Generates a number between 10000 and 99999
+        String reservationNumber = "RSV" + (10000 + random.nextInt(90000));
         System.out.println("Your reservation number: " + reservationNumber);
 
         // Attempt to reserve a session
@@ -87,7 +102,7 @@ public class Main {
         if (selectedSession != null && selectedHorse != null) {
             customer.reserveSession(reservationNumber, customer, selectedHorse, selectedSession, "2023-12-10", trainer, true);
             System.out.println("Reservation created. Requesting approval from manager...");
-            manager.approveReservation(reservationNumber); // Manager approves the reservation
+            manager.approveReservation(reservationNumber);
         } else {
             System.out.println("Invalid session or horse selection.");
         }
