@@ -11,36 +11,33 @@ package classes;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
        
         // Instantiate necessary classes
-        Customer customer = new Customer();
+        Customer customer = new Customer("Abdulrahman");
         Session session = new Session(101, "Introduction to Horse Riding", "2023-12-10", false);
         horse horse = new horse("Starlight", "Thoroughbred", true);
         Trainer trainer = new Trainer("Emily Clark", true);
 
         // Attempt to reserve a session
         String reservationNumber = "RSV123";
-        System.out.println("Attempting to reserve a session...");
-        boolean reservationResult = customer.reserveSession(reservationNumber, customer, horse, session, "2023-12-10", trainer, true);
-        System.out.println("Reservation successful: " + reservationResult);
+        System.out.println("Reserving session...");
+        customer.reserveSession(reservationNumber, customer, horse, session, "2023-12-10", trainer, true);
+        System.out.println("Reservation status checked.");
 
-        // Editing a session description
-        System.out.println("\nEditing session description...");
-        session.setDescription("Advanced Horse Riding Techniques");
-        System.out.println("Updated session description: " + session.getDescription());
+        // Editing session description
+        System.out.println("\nUpdating session description...");
+        session.setSessionType("Advanced Horse Riding Techniques");
+        System.out.println("Description updated: " + session.getSessionType());
 
         // Adding contact information for the customer
-        System.out.println("\nAdding contact information...");
-        customer.addContactInfo("Alice Johnson", "9876543210");
-        System.out.println("Contact information added.");
+        System.out.println("\nUpdating contact information...");
+        customer.AddContactinfo("Alice Johnson", "9876543210");
+        System.out.println("Contact information updated.");
 
         // Approving a session
         System.out.println("\nApproving the session...");
         session.setStatus(true);
-        System.out.println("Session approved: " + session.getStatus());
+        System.out.println("Session is now approved.");
     }
 }
