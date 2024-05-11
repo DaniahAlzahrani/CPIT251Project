@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
        
         // Instantiate necessary classes
-        Customer customer = new Customer("Abdulrahman");
+        Customer customer = new Customer();
         Session session = new Session(101, "Introduction to Horse Riding", "2023-12-10", false);
         horse horse = new horse("Starlight", "Thoroughbred", true);
         Trainer trainer = new Trainer("Emily Clark", true);
