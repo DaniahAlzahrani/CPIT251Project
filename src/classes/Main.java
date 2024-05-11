@@ -4,21 +4,38 @@
  * and open the template in the editor.
  */
 package classes;
+import java.util.Random;
 import java.util.Scanner;
 /**
  *
  * @author Hamdah-
  */
 public class Main {
-
-   public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        Manger manager = new Manger();
 
-        // Instantiate necessary classes
-        Customer customer = new Customer();
-        Session session = new Session(101, "Introduction to Horse Riding", "2023-12-10", false);
-        horse horse = new horse("Starlight", "Thoroughbred", true); // Correct class name capitalization
+        // Define available sessions and horses
+        Session[] sessions = new Session[]{
+            new Session(100, "Basic Horse Riding", "2023-12-08", true),
+            new Session(101, "Introduction to Horse Riding", "2023-12-10", true),
+            new Session(102, "Intermediate Horse Riding", "2023-12-12", true),
+            new Session(103, "Advanced Horse Riding", "2023-12-14", true),
+            new Session(104, "Expert Horse Riding", "2023-12-16", true)
+        };
+        horse[] horses = new horse[]{
+            new horse("A", "Breed1", true),
+            new horse("B", "Breed2", true),
+            new horse("C", "Breed3", true),
+            new horse("D", "Breed4", true),
+            new horse("E", "Breed5", true)
+        };
+
         Trainer trainer = new Trainer("Emily Clark", true);
+
+        // Instantiate customer
+        Customer customer = new Customer();
 
         // Adding contact information for the customer
         System.out.println("Please enter your name:");
@@ -28,29 +45,51 @@ public class Main {
         customer.AddContactinfo(name, phoneNumber);
         System.out.println("Contact information added.");
 
-        // Attempt to reserve a session
-        System.out.println("\nPlease enter reservation number:");
-        String reservationNumber = scanner.nextLine();
-        System.out.println("Attempting to reserve a session...");
-        customer.reserveSession(reservationNumber, customer, horse, session, "2023-12-10", trainer, true);
-        System.out.println("Reservation attempt complete.");
-
-        // Editing a session description
-        System.out.println("\nDo you want to change the session description? (yes/no)");
-        String editDecision = scanner.nextLine();
-        if ("yes".equalsIgnoreCase(editDecision)) {
-            System.out.println("Enter new session description:");
-            String newDescription = scanner.nextLine();
-            session.setSessionType(newDescription); // Using setSessionType if setDescription does not exist
-            System.out.println("Updated session description: " + session.getSessionType());
+        // Select a session
+        System.out.println("\nAvailable sessions (only showing available):");
+        for (Session s : sessions) {
+            if (s.getStatus()) {
+                System.out.println(s.getSessionNumber() + ": " + s.getSessionType());
+            }
+        }
+        System.out.println("Enter the session number you want to attend:");
+        int sessionChoice = scanner.nextInt();
+        scanner.nextLine(); // consume the newline
+        Session selectedSession = null;
+        for (Session s : sessions) {
+            if (s.getSessionNumber() == sessionChoice && s.getStatus()) {
+                selectedSession = s;
+                break;
+            }
         }
 
-        // Approving a session
-        System.out.println("\nDo you want to approve the session? (yes/no)");
-        String approveDecision = scanner.nextLine();
-        if ("yes".equalsIgnoreCase(approveDecision)) {
-            session.setStatus(true);
-            System.out.println("Session approved: " + session.getStatus());
+        // Select a horse
+        System.out.println("\nAvailable horses:");
+        for (horse h : horses) {
+            System.out.println(h.getName());
+        }
+        System.out.println("Enter the name of the horse you want to choose:");
+        String horseChoice = scanner.nextLine();
+        horse selectedHorse = null;
+        for (horse h : horses) {
+            if (h.getName().equalsIgnoreCase(horseChoice)) {
+                selectedHorse = h;
+                break;
+            }
+        }
+
+        // Generate and display the reservation number
+        String reservationNumber = "RSV" + (10000 + random.nextInt(90000)); // Generates a number between 10000 and 99999
+        System.out.println("Your reservation number: " + reservationNumber);
+
+        // Attempt to reserve a session
+        System.out.println("Attempting to reserve a session...");
+        if (selectedSession != null && selectedHorse != null) {
+            customer.reserveSession(reservationNumber, customer, selectedHorse, selectedSession, "2023-12-10", trainer, true);
+            System.out.println("Reservation created. Requesting approval from manager...");
+            manager.approveReservation(reservationNumber); // Manager approves the reservation
+        } else {
+            System.out.println("Invalid session or horse selection.");
         }
 
         // Close the scanner
