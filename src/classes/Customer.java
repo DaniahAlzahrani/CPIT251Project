@@ -15,7 +15,8 @@ public class Customer extends user {
 
     private ArrayList<Reservation> history = new ArrayList<>();
 
-    public Customer() {
+    public Customer(String name ) {
+        String name1 =name;
     }
 
     public void showHistory() {
